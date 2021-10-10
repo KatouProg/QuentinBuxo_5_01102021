@@ -19,35 +19,33 @@ function getArticles() {                            // J'envoie une requête HTT
     // Répartition des données de l'API dans le DOM
 
     .then(function (resultAPI) {                    
-        const articles = resultAPI;                 // Je créé ma boucle pour afficher mes articles
+        const articles = resultAPI;                 // Je crée ma boucle pour afficher mes articles
         console.table(articles);
         for (let article in articles) {
 
             // Implémentation de "a" (lien)
             let productLink = document.createElement("a");
-            document.querySelector(".items").appendChild(productLink);              // Je créer mon "a"
-            productLink.href = `product.html?id=${resultAPI[article]._id}`;         // Redirect vers la page article
+            document.querySelector(".items").appendChild(productLink);              // Je crée mon "a"
+            productLink.href = `product.html?id=${resultAPI[article]._id}`;         // Redirect vers la page article (./product.html?id=...)
 
             // Implémentation de "article"
             let productArticle = document.createElement("article");
-            productLink.appendChild(productArticle);
+            productLink.appendChild(productArticle);                                // Je crée mon "article"
 
             // Implémentation de "img" (image)
             let productImg = document.createElement("img");
-            productArticle.appendChild(productImg);
+            productArticle.appendChild(productImg);                                 // Je crée mon "img"         
             productImg.src = resultAPI[article].imageUrl;
             productImg.alt = resultAPI[article].altTxt;
 
             // Implémentation de "h3" (titre)
             let productName = document.createElement("h3");
-            productArticle.appendChild(productName);
-            productName.classList.add("productName");
+            productArticle.appendChild(productName);                                // Je crée mon "h3"
             productName.innerHTML = resultAPI[article].name;
 
             // Implémentation de "p" (description)
             let productDescription = document.createElement("p");
-            productArticle.appendChild(productDescription);
-            productDescription.classList.add("productName");
+            productArticle.appendChild(productDescription);                         // Je crée mon "p"
             productDescription.innerHTML = resultAPI[article].description;
         }
       });

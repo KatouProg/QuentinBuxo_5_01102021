@@ -1,10 +1,11 @@
 main();
 
-function main() {
+function main() {                                                                   // ---------- Je crée ma function pour récupérer mes fiches-article ----------
   getArticles();
 }
 
-// Récupération des fiches-article depuis l'API --> http://localhost:3000/api/products
+
+// Récupération des fiches-article de la page d'accueil depuis l'API --> http://localhost:3000/api/products
 
 function getArticles() {                                                            // ---------- J'envoie une requête HTTP ----------
     fetch("http://localhost:3000/api/products")
@@ -13,10 +14,11 @@ function getArticles() {                                                        
     })
     .catch((error) => {
         let items = document.querySelector("#items");
-        items.innerHTML = `Accès à l'API impossible...`;
+        items.innerHTML = `Accès à l'API impossible... Déso frérot !!!`;
     })
 
-    // Répartition des données de l'API dans le DOM
+
+// Récupération des données de l'API dans le DOM --> Affichage des fiches-article
 
     .then(function (resultAPI) {                    
         const articles = resultAPI;                 
@@ -24,29 +26,29 @@ function getArticles() {                                                        
         for (let article in articles) {                                             // ---------- Je crée ma boucle pour afficher mes articles ----------
 
             // Création de "a" (lien)
-            let productLink = document.createElement("a");
-            document.querySelector(".items").appendChild(productLink);              // ---------- Je crée mon "a" ----------
+            let productLink = document.createElement("a");                          // ---------- Je crée mon "a" dans la section .item ----------
+            document.querySelector(".items").appendChild(productLink);              
             productLink.href = `product.html?id=${resultAPI[article]._id}`;         // ---------- Redirect vers la page article (./product.html?id=...) ----------
 
             // Création de "article" (section)
-            let productArticle = document.createElement("article");
-            productLink.appendChild(productArticle);                                // ---------- Je crée mon "article" ----------
+            let productArticle = document.createElement("article");                 // ---------- Je crée ma balise "article" ----------
+            productLink.appendChild(productArticle);                                
 
             // Création de "img" (image)
-            let productImg = document.createElement("img");
-            productArticle.appendChild(productImg);                                 // ---------- Je crée mon "img" ----------         
-            productImg.src = resultAPI[article].imageUrl;
-            productImg.alt = resultAPI[article].altTxt;
+            let productImg = document.createElement("img");                         // ---------- Je crée mon "img" (image) ----------  
+            productArticle.appendChild(productImg);                                        
+            productImg.src = resultAPI[article].imageUrl;                           // ---------- J'affiche l'image de l'article ----------
+            productImg.alt = resultAPI[article].altTxt;                             // ---------- Je rapatrie le texte alternatif de l'image de l'article ----------
 
             // Création de "h3" (titre)
-            let productName = document.createElement("h3");
-            productArticle.appendChild(productName);                                // ---------- Je crée mon "h3" ----------
-            productName.innerHTML = resultAPI[article].name;
+            let productName = document.createElement("h3");                         // ---------- Je crée mon "h3" (titre) ----------
+            productArticle.appendChild(productName);                                
+            productName.innerHTML = resultAPI[article].name;                        // ---------- J'affiche le nom de l'article ----------
 
             // Création de "p" (description)
-            let productDescription = document.createElement("p");
-            productArticle.appendChild(productDescription);                         // ---------- Je crée mon "p" ----------
-            productDescription.innerHTML = resultAPI[article].description;
+            let productDescription = document.createElement("p");                   // ---------- Je crée mon "p" (description) ----------
+            productArticle.appendChild(productDescription);                         
+            productDescription.innerHTML = resultAPI[article].description;          // ---------- J'affiche la ddescription de l'article ----------
         }
       });
 }

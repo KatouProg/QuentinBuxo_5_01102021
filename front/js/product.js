@@ -1,14 +1,10 @@
 
 // Récupération des paramètres depuis l'URL                                                 // ---------- ↓↓↓↓↓ Commentaires persos ↓↓↓↓↓ ----------
 
-var str = window.location.href;                                                             // ---------- Je récupère mon id via URLSearchParams ----------        
+var str = window.location.href;                                                                     
 var url = new URL(str);
-var idProduct = url.searchParams.get("id");
+var idProduct = url.searchParams.get("id");                                                 // ---------- Je récupère mon id via URLSearchParams pour afficher mon article ----------
 console.log(idProduct);
-
-
-const colorPicked = document.querySelector("#colors");
-const quantityPicked = document.querySelector("#quantity");
 
 
 // Interroger l’API pour récupérer les détails du produit
@@ -32,7 +28,7 @@ function getArticle() {                                                         
     console.table(article);
 
 
-    // Création de "img" (image)
+    // Création + affichage de l'image
 
     let productImg = document.createElement("img");                                         // ---------- Je crée mon "img" (image) ----------
     document.querySelector(".item__img").appendChild(productImg);
@@ -40,7 +36,7 @@ function getArticle() {                                                         
     productImg.alt = article.altTxt;                                                        // ---------- Je rapatrie le texte alternatif de l'image de l'article ----------
 
 
-    // Modification de "h1"
+    // Affichage du nom
 
     let productName = document.getElementById('title');
     productName.innerHTML = article.name;                                                   // ---------- J'affiche le nom de l'article ----------                                             
@@ -60,8 +56,11 @@ function getArticle() {                                                         
 
     // Création du selecteur de couleur + Affichage de la couleur choisie
 
-    for (let colors of article.colors){
-        console.table(colors);
+    const selectedColor = document.querySelector("#colors");
+    const selectedQuantity = document.querySelector("#quantity");
+
+    for (let colors of article.colors){                                                     // ---------- Je parcours la liste de couleur ----------
+        console.table(colors);                                                              // ---------- Je l'affiche sous forme de tableau ----------
         let productColors = document.createElement("option");                               // ---------- Je crée mon selecteur de couleur ----------
         document.querySelector("#colors").appendChild(productColors);
         productColors.value = colors;
@@ -71,16 +70,16 @@ function getArticle() {                                                         
 
     // Gestion du panier
 
-    const sendToCartBtn = document.querySelector("#addToCart");
+    const sendToCartBtn = document.querySelector("#addToCart");                             // ---------- Je crée mon bouton "Ajouter au panier" ----------
 
 
     // Conditions couleur + quantité entre 1 et 100
 
-    sendToCartBtn.addEventListener("click", (event) => {
-        if (quantityPicked.value > 0 && quantityPicked.value <=100 && colorPicked.value != 0){
+    sendToCartBtn.addEventListener("click", (event) => {                                    // ---------- Je réagis au click sur le bouton ----------
+        if (selectedQuantity.value > 0 && selectedQuantity.value <=100 && selectedColor.value != 0){
 
-    let colorChoice = colorPicked.value;
-    let quantityChoice = quantityPicked.value;
+    let colorChoice = selectedColor.value;
+    let quantityChoice = selectedQuantity.value;
 
 
     // Récupération des options de l'article + ajout au panier
@@ -99,7 +98,7 @@ function getArticle() {                                                         
 
     // Pop-up de confirmation
 
-    const popupConfirmation =() =>{                                                         // ---------- Je crée ma pop-up de confirmation d'ajout au panier ----------
+    const popupConfirmation = () => {                                                       // ---------- Je crée ma pop-up de confirmation d'ajout au panier ----------
         if(window.confirm(`Votre commande de ${quantityChoice} ${article.name} ${colorChoice} à bien été ajoutée au panier
 Pour consulter votre panier, cliquez sur OK`)){
             window.location.href ="cart.html";

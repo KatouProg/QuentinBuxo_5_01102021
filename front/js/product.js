@@ -1,6 +1,7 @@
+
 // Récupération des paramètres depuis l'URL
 
-var str = window.location.href;
+var str = window.location.href;                                                             // ---------- Je récupère mon id via URLSearchParams ----------        
 var url = new URL(str);
 var idProduct = url.searchParams.get("id");
 console.log(idProduct);
@@ -10,13 +11,13 @@ const colorPicked = document.querySelector("#colors");
 const quantityPicked = document.querySelector("#quantity");
 
 
-// Récupération des articles depuis l'API
+// Interroger l’API pour récupérer les détails du produit
 
 getArticle();
 
-function getArticle() {
-    fetch("http://localhost:3000/api/products/" + idProduct)
-    .then(function (res) {
+function getArticle() {                                                                     // ---------- J'envoie une requête HTTP ----------
+    fetch("http://localhost:3000/api/products/" + idProduct)                                
+    .then(function (res) {                                                                  // ---------- Je récupère le résultat de la requête ----------
         return res.json();
     })
     .catch((error) => {
@@ -26,7 +27,7 @@ function getArticle() {
 
 // Récupération des données de l'API dans le DOM --> Affichage des données des articles
 
-.then(function (articlesResult) {
+.then(articlesResult => {
     const article = articlesResult;
     console.table(article);
 
@@ -57,14 +58,14 @@ function getArticle() {
     productDescription.innerHTML = article.description;                                     // ---------- J'affiche la description de l'article ----------
 
 
-    // Choix des couleurs
+    // Création du selecteur de couleur + Choix des couleurs
 
     for (let colors of article.colors){
         console.table(colors);
-        let productColors = document.createElement("option");                               // ---------- J'affiche mon selecteur de couleur ----------
+        let productColors = document.createElement("option");                               // ---------- Je crée mon selecteur de couleur ----------
         document.querySelector("#colors").appendChild(productColors);
         productColors.value = colors;
-        productColors.innerHTML = colors;
+        productColors.innerHTML = colors;                                                   // ---------- J'affiche la couleur choisie ----------
     }
 
 
@@ -75,23 +76,16 @@ function getArticle() {
 
     // Conditions couleur + quantité entre 1 et 100
 
-    sendToCartBtn.addEventListener("click", (event)=>{
+    sendToCartBtn.addEventListener("click", (event) => {
         if (quantityPicked.value > 0 && quantityPicked.value <=100 && colorPicked.value != 0){
 
-
-    // Récupération du choix de la couleur
-
     let colorChoice = colorPicked.value;
-                
-
-    // Récupération du choix de la quantité
-
     let quantityChoice = quantityPicked.value;
 
 
-    // Récupération des options de l'article à ajouter au panier
+    // Récupération des options de l'article + ajout au panier
 
-    let optionsProduit = {
+    let articleOptions = {                                                                  // ---------- Je crée mon Array "options de l'article" ----------
         articleID: idProduct,
         articleColor: colorChoice,
         articleQuantity: Number(quantityChoice)
@@ -105,7 +99,7 @@ function getArticle() {
 
     // Pop-up de confirmation
 
-    const popupConfirmation =() =>{
+    const popupConfirmation =() =>{                                                         // ---------- Je crée ma pop-up de confirmation d'ajout au panier ----------
         if(window.confirm(`Votre commande de ${quantityChoice} ${article.name} ${colorChoice} à bien été ajoutée au panier
 Pour consulter votre panier, cliquez sur OK`)){
             window.location.href ="cart.html";
@@ -116,40 +110,43 @@ Pour consulter votre panier, cliquez sur OK`)){
     //Importation dans le local storage
 
 
-        //Si le panier comporte déjà au moins 1 article
+        // Si le panier comporte déjà au moins 1 article
 
-    if (localStorageArticle) {
-    const resultFind = localStorageArticle.find(
-        (el) => el.articleID === idProduct && el.articleColor === colorChoice);
+        if (localStorageArticle) {
+        const resultFind = localStorageArticle.find(
+            (el) => el.articleID === idProduct && el.articleColor === colorChoice);
         
-        //Si le produit commandé est déjà dans le panier
 
-        if (resultFind) {
+        // Si le produit commandé est déjà dans le panier
+
+        if (resultFind) {                                                                       // ---------- j'incrémente la quantité du produit correspondant dans l’Array. ----------
             let newQuantite =
-            parseInt(optionsProduit.articleQuantity) + parseInt(resultFind.articleQuantity);
+            parseInt(articleOptions.articleQuantity) + parseInt(resultFind.articleQuantity);
             resultFind.articleQuantity = newQuantite;
             localStorage.setItem("produit", JSON.stringify(localStorageArticle));
             console.table(localStorageArticle);
             popupConfirmation();
 
-        //Si le produit commandé n'est pas dans le panier
+
+        // Si le produit commandé n'est pas dans le panier
 
         } else {
-            localStorageArticle.push(optionsProduit);
+            localStorageArticle.push(articleOptions);                                           // ---------- Ajout d'un nouvel élément dans l'Array ----------
             localStorage.setItem("produit", JSON.stringify(localStorageArticle));
             console.table(localStorageArticle);
             popupConfirmation();
         }
 
-    //Si le panier est vide
 
-    } else {
-        localStorageArticle =[];
-        localStorageArticle.push(optionsProduit);
-        localStorage.setItem("produit", JSON.stringify(localStorageArticle));
-        console.table(localStorageArticle);
-        popupConfirmation();
-    }}
+        // Si le panier est vide
+
+        } else {
+            localStorageArticle =[];
+            localStorageArticle.push(articleOptions);
+            localStorage.setItem("produit", JSON.stringify(localStorageArticle));
+            console.table(localStorageArticle);
+            popupConfirmation();
+        }}
     });
 });
 }

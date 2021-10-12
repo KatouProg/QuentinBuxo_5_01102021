@@ -1,5 +1,5 @@
 
-// Récupération des paramètres depuis l'URL
+// Récupération des paramètres depuis l'URL                                                 // ---------- ↓↓↓↓↓ Commentaires persos ↓↓↓↓↓ ----------
 
 var str = window.location.href;                                                             // ---------- Je récupère mon id via URLSearchParams ----------        
 var url = new URL(str);
@@ -58,7 +58,7 @@ function getArticle() {                                                         
     productDescription.innerHTML = article.description;                                     // ---------- J'affiche la description de l'article ----------
 
 
-    // Création du selecteur de couleur + Choix des couleurs
+    // Création du selecteur de couleur + Affichage de la couleur choisie
 
     for (let colors of article.colors){
         console.table(colors);
@@ -110,16 +110,16 @@ Pour consulter votre panier, cliquez sur OK`)){
     //Importation dans le local storage
 
 
-        // Si le panier comporte déjà au moins 1 article
+        // --> Le panier comporte déjà au moins 1 article
 
         if (localStorageArticle) {
         const resultFind = localStorageArticle.find(
             (el) => el.articleID === idProduct && el.articleColor === colorChoice);
         
 
-        // Si le produit commandé est déjà dans le panier
+        // --> Le produit ajouté est déjà dans le panier
 
-        if (resultFind) {                                                                       // ---------- j'incrémente la quantité du produit correspondant dans l’Array. ----------
+        if (resultFind) {                                                                   // ---------- J'incrémente la quantité du produit correspondant dans l’Array "options de l'article" ----------
             let newQuantite =
             parseInt(articleOptions.articleQuantity) + parseInt(resultFind.articleQuantity);
             resultFind.articleQuantity = newQuantite;
@@ -128,17 +128,17 @@ Pour consulter votre panier, cliquez sur OK`)){
             popupConfirmation();
 
 
-        // Si le produit commandé n'est pas dans le panier
+        // --> Le produit commandé n'est pas dans le panier
 
         } else {
-            localStorageArticle.push(articleOptions);                                           // ---------- Ajout d'un nouvel élément dans l'Array ----------
+            localStorageArticle.push(articleOptions);                                       // ---------- Ajout d'un nouvel élément dans l'Array "options de l'article" ----------
             localStorage.setItem("produit", JSON.stringify(localStorageArticle));
             console.table(localStorageArticle);
             popupConfirmation();
         }
 
 
-        // Si le panier est vide
+        // --> Le panier est vide
 
         } else {
             localStorageArticle =[];

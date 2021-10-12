@@ -1,4 +1,4 @@
-main();
+main();                                                                             // ---------- ↓↓↓↓↓ Commentaires persos ↓↓↓↓↓ ----------
 
 function main() {                                                                   // ---------- Je crée ma function pour récupérer mes fiches-article ----------
   getArticles();

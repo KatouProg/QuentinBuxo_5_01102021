@@ -20,7 +20,7 @@ function getArticles() {                                                        
 
 // Récupération des données de l'API dans le DOM --> Affichage des fiches-article
 
-    .then(articlesResult => {                                                       // ---------- Fonction anonyme (moderne) ----------
+    .then(articlesResult => {                                                       // ---------- Fonction anonyme --> = function(articlesResult) ... ----------
         articlesResult.forEach(article => {                                 
             addArticleBox(document.querySelector(".items"), article)   
         })

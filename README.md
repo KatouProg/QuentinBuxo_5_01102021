@@ -2,7 +2,7 @@
 
 This is the front end and back end server for Project 5 of the Web Developer path.
 
-<img src="https://user.oc-static.com/upload/2021/09/29/16329291678171_image2.png" alt="Un canapé avec une lampe et marqué Kanap"></a> />
+<img src="https://user.oc-static.com/upload/2021/09/29/16329291678171_image2.png" alt="Un canapé avec une lampe et marqué Kanap"></a>
 
 ## Scénario ##
 
@@ -33,7 +33,7 @@ commande, et indiquant l'identifiant de commande envoyé par l’API.
 Planifiez une suite de tests d’acceptation pour couvrir l’ensemble des fonctionnalités listées
 dans ce document (spécifications fonctionnelles et techniques Kanap).
 
-# Livrables #
+## Livrables ##
 
 Un fichier ZIP contenant le code fonctionnel du site web, nommé P5_nom_code.zip (en remplaçant “nom” par votre nom).
 Le plan de test au format PDF, nommé P5_nom_plan_test.pdf.
@@ -49,4 +49,5 @@ can then run the server with `node server`.
 The server should run on `localhost` with default port `3000`. If the
 server runs on another port for any reason, this is printed to the
 console when the server starts, e.g. `Listening on port 3001`.
+
 ### https://github.com/KatouProg/QuentinBuxo_5_01102021

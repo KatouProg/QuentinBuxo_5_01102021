@@ -60,17 +60,17 @@ function getArticle() {
         const selectedQuantity = document.querySelector("#quantity");
 
         for (let colors of article.colors){                                                     // ---------- Je parcours la liste de couleur ----------
-            console.table(colors);                                                              // ---------- Je l'affiche sous forme de tableau ----------
+            console.table(colors);                                                              // ---------- Je les récupère sous forme de tableau ----------
             let productColors = document.createElement("option");                               // ---------- Je crée mon selecteur de couleur ----------
             document.querySelector("#colors").appendChild(productColors);
             productColors.value = colors;
-            productColors.innerHTML = colors;                                                   // ---------- J'affiche la couleur choisie ----------
+            productColors.innerHTML = colors;                                                   // ---------- J'affiche le noms des couleurs ----------
         }
 
 
         // Gestion du panier
 
-        const sendToCartBtn = document.querySelector("#addToCart");                             // ---------- Je crée mon bouton "Ajouter au panier" ----------
+        const sendToCartBtn = document.querySelector("#addToCart");                             // ---------- Je sélectionne mon bouton "Ajouter au panier" ----------
 
 
         // Conditions couleur + quantité entre 1 et 100

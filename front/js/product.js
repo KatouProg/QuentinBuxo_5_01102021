@@ -1,9 +1,9 @@
 
 // Récupération des paramètres depuis l'URL                                                     // ---------- ↓↓↓↓↓ Commentaires persos ↓↓↓↓↓ ----------
 
-var str = window.location.href;                                                                 // ---------- window.location.href indique l'URL actuelle ----------       
-var url = new URL(str);
-var idProduct = url.searchParams.get("id");                                                     // ---------- Je récupère mon id via URLSearchParams pour afficher mon article ----------
+let str = window.location.href;                                                                 // ---------- window.location.href indique l'URL actuelle ----------       
+let url = new URL(str);
+let idProduct = url.searchParams.get("id");                                                     // ---------- Je récupère mon id via URLSearchParams pour afficher mon article ----------
 console.log(idProduct);
 
 
@@ -87,7 +87,12 @@ function getArticle() {
         let articleOptions = {                                                                  // ---------- Je crée mon Array "options de l'article" ----------
             articleID: idProduct,
             articleColor: colorChoice,
-            articleQuantity: Number(quantityChoice)
+            articleQuantity: quantityChoice,
+            articleName: article.name,
+            articlePrice: article.price,
+            articleDesc: article.description,
+            articleImg: article.imageUrl,
+            articleImgAlt: article.altTxt
         };
 
 
@@ -119,9 +124,9 @@ function getArticle() {
             // --> Le produit ajouté est déjà dans le panier
 
             if (resultFind) {                                                                   // ---------- J'incrémente la quantité du produit correspondant dans l’Array "options de l'article" ----------
-                let newQuantite =
+                let newQuantity =
                 parseInt(articleOptions.articleQuantity) + parseInt(resultFind.articleQuantity);
-                resultFind.articleQuantity = newQuantite;
+                resultFind.articleQuantity = newQuantity;
                 localStorage.setItem("produit", JSON.stringify(localStorageArticle));
                 console.table(localStorageArticle);
                 popupConfirmation();

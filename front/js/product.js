@@ -59,14 +59,13 @@ function getArticle() {
         const selectedColor = document.querySelector("#colors");
         const selectedQuantity = document.querySelector("#quantity");
 
-        for (let colors of article.colors){                                                     // ---------- Je parcours la liste de couleur ----------
-            console.table(colors);                                                              // ---------- Je les récupère sous forme de tableau ----------
+        
+        article.colors.forEach(color => {
             let productColors = document.createElement("option");                               // ---------- Je crée mon selecteur de couleur ----------
             document.querySelector("#colors").appendChild(productColors);
-            productColors.value = colors;
-            productColors.innerHTML = colors;                                                   // ---------- J'affiche le noms des couleurs ----------
-        }
-
+            productColors.value = color;
+            productColors.innerHTML = color;
+        })
 
         // Gestion du panier
 
@@ -118,29 +117,24 @@ function getArticle() {
 
             if (localStorageArticle) {
             const resultFind = localStorageArticle.find(
-                (el) => el.articleID === idProduct && el.articleColor === colorChoice);
+                (article) => article.articleID === idProduct && article.articleColor === colorChoice
+                );
             
 
             // --> Le produit ajouté est déjà dans le panier
 
-            if (resultFind) {                                                                   // ---------- J'incrémente la quantité du produit correspondant dans l’Array "options de l'article" ----------
-                let newQuantity =
-                parseInt(articleOptions.articleQuantity) + parseInt(resultFind.articleQuantity);
-                resultFind.articleQuantity = newQuantity;
-                localStorage.setItem("produit", JSON.stringify(localStorageArticle));
-                console.table(localStorageArticle);
-                popupConfirmation();
+                if (resultFind) {
+                    resultFind.articleQuantity = parseInt(articleOptions.articleQuantity) + parseInt(resultFind.articleQuantity);
 
 
             // --> Le produit commandé n'est pas dans le panier
 
-            } else {
-                localStorageArticle.push(articleOptions);                                       // ---------- Ajout d'un nouvel élément dans l'Array "options de l'article" ----------
-                localStorage.setItem("produit", JSON.stringify(localStorageArticle));
+                } else {
+                    localStorageArticle.push(articleOptions);
+                }
                 console.table(localStorageArticle);
+                localStorage.setItem("produit", JSON.stringify(localStorageArticle));
                 popupConfirmation();
-            }
-
 
             // --> Le panier est vide
 

@@ -15,7 +15,7 @@ if (localStorageArticle === null || localStorageArticle == 0) {
 // --> Le panier est plein
 
 else {
-    for (let produit in localStorageArticle){
+    localStorageArticle.forEach(article => {
     
     
         // Insertion de l'élément "article"
@@ -23,7 +23,7 @@ else {
         let productArticle = document.createElement("article");
         document.querySelector("#cart__items").appendChild(productArticle);
         productArticle.className = "cart__item";
-        productArticle.setAttribute('article-id', localStorageArticle[produit].articleID);
+        productArticle.setAttribute('article-id', article.articleID);
     
     
         // Insertion de l'élément "div --> cart__item__img"
@@ -37,8 +37,8 @@ else {
     
         let productImg = document.createElement("img");
         productDivImg.appendChild(productImg);
-        productImg.src = localStorageArticle[produit].articleImg;
-        productImg.alt = localStorageArticle[produit].articleImgAlt;
+        productImg.src = article.articleImg;
+        productImg.alt = article.articleImgAlt;
         
     
         // Insertion de l'élément "div --> cart__item__content"
@@ -59,14 +59,14 @@ else {
     
         let productTitle = document.createElement("h2");
         productItemContentTitlePrice.appendChild(productTitle);
-        productTitle.innerHTML = localStorageArticle[produit].articleName;
+        productTitle.innerHTML = article.articleName;
     
     
         // Insertion de la couleur
     
         let productColor = document.createElement("p");
         productTitle.appendChild(productColor);
-        productColor.innerHTML = localStorageArticle[produit].articleColor;
+        productColor.innerHTML = article.articleColor;
         productColor.style.fontSize = "18px";
     
     
@@ -74,7 +74,7 @@ else {
     
         let productPrice = document.createElement("p");
         productItemContentTitlePrice.appendChild(productPrice);
-        productPrice.innerHTML = localStorageArticle[produit].articlePrice + " €";
+        productPrice.innerHTML = article.articlePrice + " €";
     
     
         // Insertion de l'élément "div --> cart__item__content__settings"
@@ -102,7 +102,7 @@ else {
     
         let productQuantity = document.createElement("input");
         productItemContentSettingsQuantity.appendChild(productQuantity);
-        productQuantity.value = localStorageArticle[produit].articleQuantity;
+        productQuantity.value = article.articleQuantity;
         productQuantity.className = "itemQuantity";
         productQuantity.setAttribute("type", "number");
         productQuantity.setAttribute("min", "1");
@@ -124,5 +124,6 @@ else {
         productDelete.className = "deleteItem";
         productDelete.innerHTML = "Supprimer";
     }
-    }
-   
+    )
+}
+    

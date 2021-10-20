@@ -116,8 +116,8 @@ function getArticle() {
             // --> Le panier comporte déjà au moins 1 article
 
             if (localStorageArticle) {
-            const resultFind = localStorageArticle.find(
-                (article) => article.articleID === idProduct && article.articleColor === colorChoice
+                const resultFind = localStorageArticle.find(
+                    (article) => article.articleID === idProduct && article.articleColor === colorChoice
                 );
             
 

@@ -6,7 +6,7 @@ console.table(localStorageArticle);
 const cartIsEmpty = document.querySelector("#cart__items");
 
 // --> Le panier est vide
-
+function getCart() {
 if (localStorageArticle === null || localStorageArticle == 0) {
     const emptyCart = `<p>Votre panier est vide</p>`;
     cartIsEmpty.innerHTML = emptyCart;
@@ -126,6 +126,7 @@ else {
     }
     )
 }
+}
 // -------------------------------------------------------------------------------
 
 
@@ -150,7 +151,7 @@ function getTotals(){
     totalPrice = 0;
 
     for (var i = 0; i < myLength; ++i) {
-        totalPrice += (elemsQtt[i].valueAsNumber * produitLocalStorage[i].prixProduit);
+        totalPrice += (elemsQtt[i].valueAsNumber * article.articlePrice);
     }
 
     let productTotalPrice = document.getElementById('totalPrice');
@@ -159,7 +160,9 @@ function getTotals(){
 }
 getTotals();
 
+
 // Modification d'une quantité de produit
+
 function modifyQtt() {
     let qttModif = document.querySelectorAll(".itemQuantity");
 
@@ -167,7 +170,9 @@ function modifyQtt() {
         qttModif[k].addEventListener("change" , (event) => {
             event.preventDefault();
 
+
             //Selection de l'element à modifier en fonction de son id ET sa couleur
+
             let quantityModif = produitLocalStorage[k].quantiteProduit;
             let qttModifValue = qttModif[k].valueAsNumber;
             
@@ -185,7 +190,9 @@ function modifyQtt() {
 }
 modifyQtt();
 
+
 // Suppression d'un produit
+
 function deleteProduct() {
     let btn_supprimer = document.querySelectorAll(".deleteItem");
 
@@ -209,42 +216,61 @@ function deleteProduct() {
 }
 deleteProduct();
 
+
 //Instauration formulaire avec regex
+
 function getForm() {
+
+
     // Ajout des Regex
+
     let form = document.querySelector(".cart__order__form");
 
+
     //Création des expressions régulières
+
     let emailRegExp = new RegExp('^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$', 'g');
     let charRegExp = new RegExp("^[a-zA-Z ,.'-]+$");
     let addressRegExp = new RegExp("^[0-9]{1,3}(?:(?:[,. ]){1}[-a-zA-Zàâäéèêëïîôöùûüç]+)+");
 
+
     // Ecoute de la modification du prénom
+
     form.firstName.addEventListener('change', function() {
         validFirstName(this);
     });
 
+
     // Ecoute de la modification du prénom
+
     form.lastName.addEventListener('change', function() {
         validLastName(this);
     });
 
+
     // Ecoute de la modification du prénom
+
     form.address.addEventListener('change', function() {
         validAddress(this);
     });
 
+
     // Ecoute de la modification du prénom
+
     form.city.addEventListener('change', function() {
         validCity(this);
     });
 
+
     // Ecoute de la modification du prénom
+
     form.email.addEventListener('change', function() {
         validEmail(this);
     });
 
+
     //validation du prénom
+
     const validFirstName = function(inputFirstName) {
         let firstNameErrorMsg = inputFirstName.nextElementSibling;
 
@@ -255,7 +281,9 @@ function getForm() {
         }
     };
 
+
     //validation du nom
+
     const validLastName = function(inputLastName) {
         let lastNameErrorMsg = inputLastName.nextElementSibling;
 
@@ -266,7 +294,9 @@ function getForm() {
         }
     };
 
+
     //validation de l'adresse
+
     const validAddress = function(inputAddress) {
         let addressErrorMsg = inputAddress.nextElementSibling;
 
@@ -277,7 +307,9 @@ function getForm() {
         }
     };
 
+
     //validation de la ville
+
     const validCity = function(inputCity) {
         let cityErrorMsg = inputCity.nextElementSibling;
 
@@ -288,7 +320,9 @@ function getForm() {
         }
     };
 
+
     //validation de l'email
+
     const validEmail = function(inputEmail) {
         let emailErrorMsg = inputEmail.nextElementSibling;
 
@@ -301,9 +335,11 @@ function getForm() {
     }
 getForm();
 
+
 //console.table(clientLocalStorage);
 
 //Envoi des informations client au localstorage
+
 function postForm(){
     const btn_commander = document.getElementById("order");
 
@@ -350,6 +386,7 @@ function postForm(){
         fetch("http://localhost:3000/api/products/order", options)
         .then(res => res.json())
         .then((data) => {
+
             //localStorage.clear();
             localStorage.setItem("orderId", data.orderId);
             console.log("orderId");

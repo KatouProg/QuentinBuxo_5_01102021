@@ -198,10 +198,10 @@ quantityModification();
 // Suppression d'un produit
 
 function deleteProduct() {
-    let deleteButton = document.querySelectorAll(".deleteItem");
+    let deleteBtn = document.querySelectorAll(".deleteItem");
 
-    for (let j = 0; j < deleteButton.length; j++){
-        deleteButton[j].addEventListener("click" , (event) => {
+    for (let j = 0; j < deleteBtn.length; j++){
+        deleteBtn[j].addEventListener("click" , (event) => {
             event.preventDefault();
 
             //Selection de l'element à supprimer en fonction de son id ET sa couleur
@@ -223,6 +223,8 @@ function deleteProduct() {
 }
 deleteProduct();
 
+
+// ----------------------------------------------------------------------------------
 
 //Instauration formulaire avec regex
 
@@ -248,35 +250,35 @@ function getForm() {
     });
 
 
-    // Ecoute de la modification du prénom
+    // Ecoute de la modification du nom
 
     form.lastName.addEventListener('change', function() {
         validLastName(this);
     });
 
 
-    // Ecoute de la modification du prénom
+    // Ecoute de la modification de l'adresse
 
     form.address.addEventListener('change', function() {
         validAddress(this);
     });
 
 
-    // Ecoute de la modification du prénom
+    // Ecoute de la modification de la ville
 
     form.city.addEventListener('change', function() {
         validCity(this);
     });
 
 
-    // Ecoute de la modification du prénom
+    // Ecoute de la modification du mail
 
     form.email.addEventListener('change', function() {
         validEmail(this);
     });
 
 
-    //validation du prénom
+    // Validation du prénom
 
     const validFirstName = function(inputFirstName) {
         let firstNameErrorMsg = inputFirstName.nextElementSibling;
@@ -289,7 +291,7 @@ function getForm() {
     };
 
 
-    //validation du nom
+    // Validation du nom
 
     const validLastName = function(inputLastName) {
         let lastNameErrorMsg = inputLastName.nextElementSibling;
@@ -302,7 +304,7 @@ function getForm() {
     };
 
 
-    //validation de l'adresse
+    // Validation de l'adresse
 
     const validAddress = function(inputAddress) {
         let addressErrorMsg = inputAddress.nextElementSibling;
@@ -315,7 +317,7 @@ function getForm() {
     };
 
 
-    //validation de la ville
+    // Validation de la ville
 
     const validCity = function(inputCity) {
         let cityErrorMsg = inputCity.nextElementSibling;
@@ -328,7 +330,7 @@ function getForm() {
     };
 
 
-    //validation de l'email
+    // Validation du mail
 
     const validEmail = function(inputEmail) {
         let emailErrorMsg = inputEmail.nextElementSibling;

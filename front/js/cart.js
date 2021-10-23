@@ -385,22 +385,21 @@ function sendForm(){
             products: orderProducts,
         } 
 
-
-         fetch("http://localhost:3000/api/products/order", {
+        const options = {
             method: 'POST',
             headers: {
                 'Accept': 'application/json', 
                 "Content-Type": "application/json" 
             },
             body: JSON.stringify(order)
-         })
-            .then((response) => response.json())
+        }
+         fetch("http://localhost:3000/api/products/order", options)
+            .then((res) => res.json())
             .then((data) => {
-                console.log(data);
                 localStorage.clear();
                 localStorage.setItem("orderId", data.orderId);
 
-                document.location.href = "confirmation.html";
+                document.location.href = "./confirmation.html?id=${val.orderId}";
             })
             .catch((err) => {
                 alert ("Ca marche poooooo !!! : " + err.message);

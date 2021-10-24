@@ -383,27 +383,52 @@ function sendForm(){
                 email: inputMail.value,
             },
             products: orderProducts,
-        } 
+        };
 
-        const options = {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json', 
-                "Content-Type": "application/json" 
-            },
-            body: JSON.stringify(order)
-        }
-         fetch("http://localhost:3000/api/products/order", options)
-            .then((res) => res.json())
-            .then((data) => {
-                localStorage.clear();
-                localStorage.setItem("orderId", data.orderId);
 
-                document.location.href = "./confirmation.html?id=${val.orderId}";
-            })
-            .catch((err) => {
-                alert ("Ca marche poooooo !!! : " + err.message);
-            });
+//         fetch("http://localhost:3000/api/products/order", {
+//             method: "POST",
+//             headers: {
+//             "Accept": "application/json",
+//             "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify({ order }),
+//         })
+//         .then((res) => res.json())
+//         .then((data) => {
+//           localStorage.setItem("order", JSON.stringify(data));
+//           window.location.href = "confirmation.html";
+//           localStorage.removeItem("panier");
+//         })
+//         .catch((err) => {
+//             alert ("Ca marche poooooo !!! : " + err.message);
+//         });
+//     });
+// }
+
+// ---------------------------------------------------------------------
+
+         const options = {
+             method: 'POST',
+             headers: {
+                 'Accept': 'application/json', 
+                 "Content-Type": "application/json" 
+             },
+             body: JSON.stringify(order)
+         };
+          fetch("http://localhost:3000/api/products/order", options)
+             .then((res) => res.json())
+             .then((data) => {
+                 localStorage.clear();
+                 localStorage.setItem("orderId", data.orderId);
+
+                 document.location.href = "./confirmation.html?id=${val.orderId}";
+             })
+             .catch((err) => {
+                 alert ("Ca marche poooooo !!! : " + err.message);
+             });
+
+// ------------------------------------------------------------------------------------
 
         // fetch("http://localhost:3000/api/products/order", options) = {
         //     method: 'POST',
@@ -425,6 +450,9 @@ function sendForm(){
         //         alert ("Ca marche poooooo !!! : " + err.message);
         //     })
         // }
-    })
-}
-sendForm();
+
+// -------------------------------------------------------------------------------------
+
+     })
+ }
+ sendForm();

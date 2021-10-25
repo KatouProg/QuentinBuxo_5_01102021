@@ -17,7 +17,6 @@ if (localStorageArticle === null || localStorageArticle == 0) {
 else {
     localStorageArticle.forEach(article => {
     
-    
         // Insertion de l'élément "article"
     
         let productArticle = document.createElement("article");
@@ -123,6 +122,7 @@ else {
         productItemContentSettingsDelete.appendChild(productDelete);
         productDelete.className = "deleteItem";
         productDelete.innerHTML = "Supprimer";
+        productDelete.setAttribute("onclick",`deleteProduct("${article.articleID}","${article.articleColor}")`);
     }
     )
 }
@@ -197,31 +197,15 @@ quantityModification();
 
 // Suppression d'un produit
 
-function deleteProduct() {
-    let deleteBtn = document.querySelectorAll(".deleteItem");
+function deleteProduct(articleID, color) {
+    localStorageArticle = localStorageArticle.filter( el => el.articleID !== articleID || el.articleColor !== color);
+    localStorage.setItem("produit", JSON.stringify(localStorageArticle));
 
-    for (let j = 0; j < deleteBtn.length; j++){
-        deleteBtn[j].addEventListener("click" , (event) => {
-            event.preventDefault();
+    //Alerte produit supprimé et refresh
 
-            //Selection de l'element à supprimer en fonction de son id ET sa couleur
-
-            let idDelete = localStorageArticle[j].articleID;
-            let colorDelete = localStorageArticle[j].articleColor;
-
-            localStorageArticle = localStorageArticle.filter( el => el.articleID !== idDelete || el.articleColor !== colorDelete );
-            
-            localStorage.setItem("produit", JSON.stringify(localStorageArticle));
-
-
-            //Alerte produit supprimé et refresh
-
-            alert("Le produit a bien été supprimé de votre panier");
-            location.reload();
-        })
-    }
+    alert("Le produit a bien été supprimé de votre panier");
+    location.reload();
 }
-deleteProduct();
 
 
 // ----------------------------------------------------------------------------------
@@ -410,11 +394,10 @@ function sendForm(){
 
          const options = {
              method: 'POST',
-             headers: {
-                 'Accept': 'application/json', 
-                 "Content-Type": "application/json" 
+             headers: { 
+                 "Content-Type": "application/json"
              },
-             body: JSON.stringify(order)
+             body: order
          };
           fetch("http://localhost:3000/api/products/order", options)
              .then((res) => res.json())
@@ -422,10 +405,11 @@ function sendForm(){
                  localStorage.clear();
                  localStorage.setItem("orderId", data.orderId);
 
-                 document.location.href = "./confirmation.html?id=${val.orderId}";
+                 window.location.href = "./confirmation.html?id=${val.orderId}";
              })
              .catch((err) => {
-                 alert ("Ca marche poooooo !!! : " + err.message);
+                console.log(err); 
+                alert ("Ca marche poooooo !!! : " + err.message);
              });
 
 // ------------------------------------------------------------------------------------

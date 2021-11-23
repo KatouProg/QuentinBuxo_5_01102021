@@ -371,28 +371,6 @@ function sendForm(){
         };
 
 
-//         fetch("http://localhost:3000/api/products/order", {
-//             method: "POST",
-//             headers: {
-//             "Accept": "application/json",
-//             "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify({ order }),
-//         })
-//         .then((res) => res.json())
-//         .then((data) => {
-//           localStorage.setItem("order", JSON.stringify(data));
-//           window.location.href = "confirmation.html";
-//           localStorage.removeItem("panier");
-//         })
-//         .catch((err) => {
-//             alert ("Ca marche poooooo !!! : " + err.message);
-//         });
-//     });
-// }
-
-// ---------------------------------------------------------------------
-
          const options = {
              method: 'POST',
              body: JSON.stringify(order),
@@ -412,32 +390,6 @@ function sendForm(){
              .catch((err) => {
                 alert ("Ca marche poooooo !!! : " + err.message);
              });
-
-// ------------------------------------------------------------------------------------
-
-        // fetch("http://localhost:3000/api/products/order", options) = {
-        //     method: 'POST',
-        //     headers: {
-        //         'Accept': 'application/json', 
-        //         "Content-Type": "application/json" 
-        //     },
-        //     body: JSON.stringify(order)
-
-        //     .then((response) => response.json())
-        //     .then((data) => {
-        //         console.log(data);
-        //         localStorage.clear();
-        //         localStorage.setItem("orderId", data.orderId);
-
-        //         document.location.href = "confirmation.html";
-        //     })
-        //     .catch((err) => {
-        //         alert ("Ca marche poooooo !!! : " + err.message);
-        //     })
-        // }
-
-// -------------------------------------------------------------------------------------
-
      })
  }
  sendForm();

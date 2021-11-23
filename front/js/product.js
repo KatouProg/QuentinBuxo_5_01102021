@@ -7,6 +7,7 @@ let idProduct = url.searchParams.get("id");                                     
 console.log(idProduct);
 
 
+
 // Interroger l’API pour récupérer les détails du produit
 
 getArticle();

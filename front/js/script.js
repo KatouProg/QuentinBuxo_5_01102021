@@ -14,7 +14,7 @@ function getArticles() {                                                        
     })
     .catch((error) => {
         let items = document.querySelector("#items");
-        items.innerHTML = `Accès à l'API impossible... Déso frérot !!!`;
+        items.innerHTML = `Accès à l'API impossible...`;
     })
 
 

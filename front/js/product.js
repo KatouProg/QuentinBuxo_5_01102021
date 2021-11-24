@@ -18,7 +18,7 @@ function getArticle() {
         return res.json();
     })
     .catch((error) => {
-        console.log("Accès à l'API impossible... Déso frérot !!!");
+        console.log("Accès à l'API impossible ...");
     })
 
 
@@ -104,8 +104,7 @@ function getArticle() {
         // Pop-up de confirmation
 
         const popupConfirmation = () => {                                                       // ---------- Je crée ma pop-up de confirmation d'ajout au panier ----------
-            if(window.confirm(`Votre commande de ${quantityChoice} ${article.name} ${colorChoice} à bien été ajoutée au panier
-    Pour consulter votre panier, cliquez sur OK`)){
+            if(window.confirm(`Votre commande de ${quantityChoice} ${article.name} ${colorChoice} à bien été ajoutée au panier. Pour consulter votre panier, cliquez sur OK`)){
                 window.location.href ="cart.html";
             }
         }
